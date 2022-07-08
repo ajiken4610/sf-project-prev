@@ -1,5 +1,5 @@
 <template lang="pug">
-NuxtPage
+NuxtPage.container.my-4
 </template>
 <script setup lang="ts">
 useHead({
