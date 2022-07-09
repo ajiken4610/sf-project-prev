@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 defineProps<{
-  modelValue: string;
+  modelValue?: string;
 }>();
 const emit = defineEmits<{
   (e: "update:modelValue", value: string): void;
@@ -33,13 +33,11 @@ function updateValue(event: Event) {
 .flex-textarea__dummy {
   overflow: hidden;
   visibility: hidden;
-  box-sizing: border-box;
   padding: 5px 15px;
-  min-height: 10em;
+  min-height: 5em;
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  border: 1px solid;
 }
 .flex-textarea__textarea {
   position: absolute;
@@ -47,12 +45,10 @@ function updateValue(event: Event) {
   left: 0;
   display: block;
   overflow: hidden;
-  box-sizing: border-box;
   padding: 5px 15px;
   width: 100%;
   height: 100%;
   background-color: transparent;
-  border-radius: 4px;
   color: inherit;
   font: inherit;
   letter-spacing: inherit;

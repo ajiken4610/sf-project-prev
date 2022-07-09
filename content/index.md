@@ -37,6 +37,7 @@ Go to Editor>
 
 ### 企画の内容
 Youtube動画や、GoogleDriveのPDFファイルなどをIDで指定します。  
+Youtube動画、GoogleDriveのファイル(ファイルプレビューとRawファイル)、Githubのファイル、Gist埋め込み、ページ埋め込み、NoContent  に対応します。  
 以下に、どのように記述すればよいか示しておきます。企画にはそれぞれIDを指定してください。  
 Youtubeでは、VideoId、GoogleDriveではFileIdとか言います。
 :::content-table
