@@ -11,9 +11,7 @@
       >
     </h2>
     <NuxtLink to="/editor" class=""
-      ><button class="btn btn-outline-primary mb-2">
-        Go to Editor&gt;
-      </button></NuxtLink
+      ><button class="btn btn-primary mb-2">Go to Editor&gt;</button></NuxtLink
     >
     <p>このリンクよりアクセスして、内容を編集して遊んでみてください。</p>
     <h2 id="usage">

@@ -3,15 +3,16 @@
   .iframe-wrapper(v-if="data.type !== 'none'")
     iframe(:src="frameLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
   .title-owner-wrapper
-    .h5 {{data.title}}
+    .h5(v-html="$parseMarkdown(data.title)")
     .text-muted {{data.owner}}
   hr
   .description-wrapper
-    div {{data.description}}
+    div(v-html="$parseMarkdown(data.description)")
 </template>
 
 <script setup lang="ts">
 import { Buffer } from "buffer";
+const { $parseMarkdown } = useNuxtApp();
 const route = useRoute();
 const data = {
   ...{
@@ -56,7 +57,7 @@ const frameLink = computed(() => {
 });
 
 const defaultRatio = computed(
-  () => ({ youtube: "56.25%" }?.[route.query.type.toString()] || "100%")
+  () => ({ youtube: "56.25%" }?.[route.query.type?.toString()] || "100%")
 );
 </script>
 
@@ -66,6 +67,9 @@ const defaultRatio = computed(
   padding-bottom: v-bind("data.ratio || defaultRatio");
   height: 0;
   overflow: hidden;
+  border-color: #fff;
+  border-radius: 5px;
+  background-color: rgba(127, 127, 127, 0.5);
 }
 .iframe-wrapper > iframe {
   position: absolute;

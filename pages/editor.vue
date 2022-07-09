@@ -31,11 +31,11 @@
   div
     label.form-label(for="input-ratio") コンテンツの比率
     input#input-ratio.form-control(v-model="data.ratio" placeholder="「height/width%」を入力。%以外にもCSSで使用できる単位が使用可能。")
-  div
-    div
-      button.btn.btn-outline-primary.float-start(@click="data={}") Reset
-    RouterLink(:to="{ path: '/preview',query:data}")
-      button.btn.btn-primary.float-end Go!
+  .row
+    div.col
+      button.btn.btn-outline-primary.w-100(@click="data={}") Reset
+    RouterLink.col.ms-auto(:to="{ path: '/preview',query:data}")
+      button.btn.btn-primary.w-100 Go!
 </template>
 
 <script setup lang="ts">
