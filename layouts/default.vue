@@ -12,7 +12,7 @@ div
   slot
   footer.mt-3.py-4.container.animatable(:class="{loading}")
     hr
-    div.text-muted.text-end @サレ祭2022
+    .text-muted.text-end @サレ祭2022
 </template>
 
 <script setup lang="ts">

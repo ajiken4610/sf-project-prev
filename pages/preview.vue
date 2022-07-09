@@ -1,7 +1,7 @@
 <template lang="pug">
 .project-wrapper
   .iframe-wrapper(v-if="data.type !== 'none'")
-    iframe(:src="frameLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+    iframe(v-if="allowLoad" :src="frameLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
   .title-owner-wrapper
     .h5(v-html="$parseMarkdown(data.title)")
     .text-muted {{data.owner}}
@@ -26,6 +26,10 @@ const data = {
   },
   ...route.query,
 };
+const allowLoad = ref(false);
+setTimeout(() => {
+  allowLoad.value = true;
+}, 2000);
 const frameLink = computed(() => {
   let ret = "";
   switch (data.type) {
