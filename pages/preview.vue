@@ -9,6 +9,7 @@ div
         .display-1.d-table-cell.align-middle.text-center Loading...
       iframe(v-if="allowLoad" :src="frameLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
     .title-owner-wrapper
+      span.text-muted.tag(v-if="data.tags" v-for="tag in data.tags") {{"#"+tag}}
       .h5(v-html="$parseMarkdown(data.title||'')")
       .text-muted {{data.owner}}
     hr
@@ -108,5 +109,8 @@ img {
 
 .project-wrapper > :not(:last-child) {
   margin-bottom: 1rem;
+}
+.tag:not(:first-child) {
+  padding-left: 0.25em;
 }
 </style>
