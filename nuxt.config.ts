@@ -1,5 +1,4 @@
 import { defineNuxtConfig } from "nuxt";
-import { RouteLocation } from "vue-router";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
