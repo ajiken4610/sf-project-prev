@@ -45,7 +45,7 @@ import axios from "axios";
 const data = useCookie<{ [key: string]: string }>("project", {
   default: () => ({}),
 });
-let timeoutId: number = null;
+let timeoutId: number | null = null;
 watch(
   data,
   () => {

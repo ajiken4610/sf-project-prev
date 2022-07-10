@@ -9,27 +9,40 @@ div
         .display-1.d-table-cell.align-middle.text-center Loading...
       iframe(v-if="allowLoad" :src="frameLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
     .title-owner-wrapper
-      .h5(v-html="$parseMarkdown(data.title)")
+      .h5(v-html="$parseMarkdown(data.title||'')")
       .text-muted {{data.owner}}
     hr
     .description-wrapper
-      div(v-html="$parseMarkdown(data.description)")
+      div(v-html="$parseMarkdown(data.description||'')")
+  hr.my-5
+  .card-wrapper
+    .h4 カード表示プレビュー
+    .row.row-cols-1.row-cols-sm-2.row-cols-lg-4.g-4
+      .col
+        ProjectCard(:project="data")
+      .col
+        ProjectCard(:project="data")
+      .col
+        ProjectCard(:project="data")
+      .col
+        ProjectCard(:project="data")
 </template>
 
 <script setup lang="ts">
 import { Buffer } from "buffer";
+import { SFProject } from "@/types/SFProject";
 const { $parseMarkdown } = useNuxtApp();
 const route = useRoute();
 const data = {
-  ...{
+  ...({
     title: "No title",
     description: "No description",
     owner: "No owner",
-    thumbnail: null,
+    thumbnail: "",
     type: "none",
     id: "",
     ratio: "",
-  },
+  } as SFProject),
   ...route.query,
 };
 const allowLoad = ref(false);
@@ -60,14 +73,14 @@ const frameLink = computed(() => {
         ).toString("base64");
       break;
     case "iframe":
-      ret = data.id;
+      ret = data.id || "";
       break;
   }
   return ret;
 });
 
 const defaultRatio = computed(
-  () => ({ youtube: "56.25%" }?.[route.query.type?.toString()] || "100%")
+  () => ({ youtube: "56.25%" }?.[route.query.type?.toString() || ""] || "100%")
 );
 </script>
 
