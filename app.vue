@@ -20,7 +20,27 @@ $dark: #181b2c;
 $body-bg: #181b2c;
 $body-color: #fff;
 
+$card-height: 100%;
+
+:root {
+  --vs-controls-color: #ffffff;
+  --vs-border-color: #ffffff;
+
+  --vs-dropdown-bg: #181b2c;
+  --vs-dropdown-color: #ffffff;
+  --vs-dropdown-option-color: #ffffff;
+
+  --vs-selected-bg: #181b2c;
+  --vs-selected-color: #ffffff;
+
+  --vs-search-input-color: #ffffff;
+
+  --vs-dropdown-option--active-bg: #2d3353;
+  --vs-dropdown-option--active-color: #ffffff;
+}
 @import "../node_modules/bootstrap/scss/bootstrap";
+
+@import "vue-select/dist/vue-select.css";
 
 $custom-colors: (
   "sfsite": #181b2c,

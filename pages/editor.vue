@@ -10,6 +10,10 @@
     label.form-label(for="input-description") 詳細
     FlexTextarea#input-description.form-control(v-model="data.description" placeholder="Markdown記法が利用できます")
   div
+    label.form-label(for="input-tags") タグ(検索キーワードとして参照されます。)
+    VSelect(v-model="(data.tags)" multiple :options="searchingText?[searchingText]:[]" @search="onTagTextInput")
+      template(#no-options) タグを入力してEnter
+  div
     label.form-label(for="input-owner") 所属
     input#input-owner.form-control(v-model="data.owner" placeholder="一意の所属名")
   div
@@ -36,13 +40,18 @@
   .row
     div.col
       button.btn.btn-outline-primary.w-100(@click="data={}") Reset
-    RouterLink.col.ms-auto(:to="{ path: '/preview',query:data}")
+    RouterLink.col.ms-auto(:to="{ path: '/preview', query: { ...data } }")
       button.btn.btn-primary.w-100 Go!
 </template>
 
 <script setup lang="ts">
-import axios from "axios";
-const data = useCookie<{ [key: string]: string }>("project", {
+import { SFProject } from "~~/types/SFProject";
+const { $vSelect: VSelect } = useNuxtApp();
+const searchingText = ref("");
+function onTagTextInput(search: string) {
+  searchingText.value = search;
+}
+const data = useCookie<SFProject>("project", {
   default: () => ({}),
 });
 let timeoutId: number | null = null;
@@ -53,7 +62,7 @@ watch(
       clearTimeout(timeoutId);
     }
     timeoutId = window.setTimeout(() => {
-      const saveCookie = useCookie<{ [key: string]: string }>("project");
+      const saveCookie = useCookie<SFProject>("project");
       saveCookie.value = data.value;
     }, 1000);
   },
@@ -62,23 +71,8 @@ watch(
 const isIdExtractable = computed(() => data.value.type === "youtube");
 async function extractId() {
   if (data.value.type === "youtube") {
-    data.value.thumbnail = `http://img.youtube.com/vi/${data.value.id}/default.jpg`;
-  } /*else if (data.value.type === "drive") {
-    try {
-      data.value.thumbnail = (
-        await axios.get(
-          `https://script.google.com/macros/s/AKfycbxwTzgmPWMk2zTCZE2zGaOZh9NNygRZMWg5szvoWkaBBII-9oA5GQJAy3oh4q0MzaxR/exec`,
-          {
-            params: { crossDomain: true, id: data.value.id },
-            headers: {
-              //"Access-Control-Allow-Origin": "*",
-              "Content-Type": "x-www-form-urlencoded",
-            },
-          }
-        )
-      ).data.url;
-    } catch (e) {}
-  }*/
+    data.value.thumbnail = `https://img.youtube.com/vi/${data.value.id}/default.jpg`;
+  }
 }
 </script>
 

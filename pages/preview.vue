@@ -5,7 +5,7 @@ div
   .project-wrapper
     .iframe-wrapper(v-if="data.type !== 'none'")
       img(v-if="data.thumbnail" :src="data.thumbnail")
-      .position-absolute.d-table.h-100.w-100(v-else) 
+      .position-absolute.d-table.h-100.w-100 
         .display-1.d-table-cell.align-middle.text-center Loading...
       iframe(v-if="allowLoad" :src="frameLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
     .title-owner-wrapper

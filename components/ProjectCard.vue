@@ -7,7 +7,7 @@
       rect(width="100%" height="100%" fill="#888")
       text(x="50%" y="50%" dy=".3em" text-anchor="middle") No thumbnail
   .card-body
-    .h5.card-title(v-html="$parseMarkdown(props.project.title||'')")
+    .h6.card-title(v-html="$parseMarkdown(props.project.title||'')")
     .h6.mb-2.text-muted.card-subtitle {{props.project.owner}}
     .card-text.text-muted.description(v-html="$parseMarkdown(props.project.description||'')")
   NuxtLink.stretched-link(to="/")
@@ -22,11 +22,11 @@ const props = defineProps<{ project: SFProject }>();
 
 <style scoped lang="scss">
 .card {
-  height: 18rem;
+  max-height: 24rem;
 }
 .card-img-top {
   object-fit: cover;
-  height: 10rem;
+  height: 8rem;
   filter: blur(1px);
 }
 
@@ -38,7 +38,7 @@ const props = defineProps<{ project: SFProject }>();
 }
 .description {
   font-size: 0.7rem;
-  background: linear-gradient(white, transparent 3rem);
+  background: white; // linear-gradient(white, transparent);
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }

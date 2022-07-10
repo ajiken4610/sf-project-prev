@@ -6,4 +6,5 @@ export class SFProject {
   id?: string;
   thumbnail?: string;
   ratio?: string;
+  tags?: string[];
 }
