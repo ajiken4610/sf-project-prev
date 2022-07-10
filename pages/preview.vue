@@ -1,13 +1,19 @@
 <template lang="pug">
-.project-wrapper
-  .iframe-wrapper(v-if="data.type !== 'none'")
-    iframe(v-if="allowLoad" :src="frameLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
-  .title-owner-wrapper
-    .h5(v-html="$parseMarkdown(data.title)")
-    .text-muted {{data.owner}}
-  hr
-  .description-wrapper
-    div(v-html="$parseMarkdown(data.description)")
+div
+  Head
+    Title {{data.title}}
+  .project-wrapper
+    .iframe-wrapper(v-if="data.type !== 'none'")
+      img(v-if="data.thumbnail" :src="data.thumbnail")
+      .position-absolute.d-table.h-100.w-100(v-else) 
+        .display-1.d-table-cell.align-middle.text-center Loading...
+      iframe(v-if="allowLoad" :src="frameLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+    .title-owner-wrapper
+      .h5(v-html="$parseMarkdown(data.title)")
+      .text-muted {{data.owner}}
+    hr
+    .description-wrapper
+      div(v-html="$parseMarkdown(data.description)")
 </template>
 
 <script setup lang="ts">
@@ -68,19 +74,23 @@ const defaultRatio = computed(
 <style scoped lang="scss">
 .iframe-wrapper {
   position: relative;
-  padding-bottom: v-bind("data.ratio || defaultRatio");
+  padding-bottom: min(90vh, v-bind("data.ratio || defaultRatio"));
   height: 0;
   overflow: hidden;
-  border-color: #fff;
   border-radius: 5px;
   background-color: rgba(127, 127, 127, 0.5);
 }
-.iframe-wrapper > iframe {
+.iframe-wrapper > iframe,
+img {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.iframe-wrapper > img {
+  filter: blur(10px);
 }
 
 .project-wrapper > :not(:last-child) {

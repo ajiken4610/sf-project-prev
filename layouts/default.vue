@@ -13,28 +13,57 @@ div
   footer.mt-3.py-4.container.animatable(:class="{loading}")
     hr
     .text-muted.text-end @サレ祭2022
+  .overlay.animatable.d-table(:class="{overlaying,touchable:loading}")
+    .display-1.d-table-cell.align-middle.text-center Loading...
+    
 </template>
 
 <script setup lang="ts">
 const router = useRouter();
 const loading = ref(false);
+const overlaying = ref(false);
 router.beforeEach((to, from, next) => {
   loading.value = true;
+  overlaying.value = true;
   next();
 });
 router.afterEach(() => {
+  overlaying.value = false;
   setTimeout(() => {
     loading.value = false;
   }, 1000);
+});
+router.onError((error) => {
+  console.log("Routing error:", error);
+  alert(
+    "ページルーティング時にエラーが発生しました。\nページを再読み込みしてください。"
+  );
+  window.location.reload();
 });
 </script>
 
 <style scoped lang="scss">
 .animatable {
-  transition: all 1s;
+  transition: opacity 1s;
 }
 .loading {
   opacity: 0;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  content: "helloworld";
+}
+
+.overlay:not(.overlaying) {
+  opacity: 0;
+}
+.overlay:not(.touchable) {
+  visibility: hidden;
 }
 </style>
 
