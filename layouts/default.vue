@@ -13,9 +13,7 @@ div
   footer.mt-3.py-4.container.animatable(:class="{loading}")
     hr
     .text-muted.text-end @サレ祭2022
-  .overlay.animatable.d-table(:class="{overlaying,touchable:loading}")
-    .display-1.d-table-cell.align-middle.text-center Loading...
-    
+
 </template>
 
 <script setup lang="ts">
