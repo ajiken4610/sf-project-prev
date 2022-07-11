@@ -11,7 +11,7 @@ div
     .title-owner-wrapper
       span.text-muted.tag(v-if="data.tags" v-for="tag in data.tags") {{"#"+tag}}
       .h5(v-html="parseMarkdown(data.title||'')")
-      ShareButton.float-end(link="sfsitepreview.web.app")
+      ShareButton.float-end(link="https://sfsitepreview.web.app")
       .text-muted {{data.owner}}
       
     hr

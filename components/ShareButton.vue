@@ -5,6 +5,9 @@
     li.dropdown-item(@click="openTwitter")
       span.bi-twitter
       span.share Twitter
+    li.dropdown-item(@click="openLine")
+      span.bi-line
+      span.share Line
     li.dropdown-item(@click="copyToClipboard")
       span.bi-clipboard
       span.share Clipboard
@@ -13,10 +16,15 @@
 <script setup lang="ts">
 const props = defineProps<{ link: string; message?: string }>();
 const message = props.message ?? "サレ祭のこの企画が面白い！";
+const messageLink = "#サレ祭 #サレ祭2022\n" + message + props.link;
 function openTwitter() {
   window.open(
-    "https://twitter.com/intent/tweet?text=" +
-      encodeURIComponent("#サレ祭 #サレ祭2022\n" + message + props.link)
+    "https://twitter.com/intent/tweet?text=" + encodeURIComponent(messageLink)
+  );
+}
+function openLine() {
+  window.open(
+    "https://line.me/R/share?text=" + encodeURIComponent(messageLink)
   );
 }
 function copyToClipboard() {
