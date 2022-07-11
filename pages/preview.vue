@@ -10,8 +10,8 @@ div
       iframe(v-if="allowLoad" :src="frameLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
     .title-owner-wrapper
       span.text-muted.tag(v-if="data.tags" v-for="tag in data.tags") {{"#"+tag}}
-      ShareButton.float-end(link="sfsitepreview.web.app")
       .h5(v-html="parseMarkdown(data.title||'')")
+      ShareButton.float-end(link="sfsitepreview.web.app")
       .text-muted {{data.owner}}
       
     hr

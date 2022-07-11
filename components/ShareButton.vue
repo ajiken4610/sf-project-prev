@@ -16,11 +16,7 @@ const message = props.message ?? "サレ祭のこの企画が面白い！";
 function openTwitter() {
   window.open(
     "https://twitter.com/intent/tweet?text=" +
-      encodeURIComponent(
-        "#サレ祭 #サレ祭2022\n" +
-          (message ? message + "\n" : undefined) +
-          props.link
-      )
+      encodeURIComponent("#サレ祭 #サレ祭2022\n" + message + props.link)
   );
 }
 function copyToClipboard() {
