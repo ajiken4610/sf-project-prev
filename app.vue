@@ -5,13 +5,13 @@ LoadingOverlay
 </template>
 <script setup lang="ts">
 import "bootstrap";
-const { $Sleeper, $Synchronizer } = useNuxtApp();
+import { Synchronizer, Sleeper } from "./composables/Utils";
 const router = useRouter();
-const synchronizer = new $Synchronizer();
+const synchronizer = new Synchronizer();
 router.beforeEach((to, from, next) => {
   synchronizer.synchronized(async () => {
     next();
-    await $Sleeper.sleep(2000);
+    await Sleeper.sleep(2000);
   });
 });
 useHead({
@@ -29,6 +29,12 @@ $dark: #181b2c;
 
 $body-bg: #181b2c;
 $body-color: #fff;
+
+$component-active-color: #9a77db;
+$component-active-bg: $body-bg;
+
+$popover-bg: $body-bg;
+$popover-border-color: $body-color;
 
 $card-height: 100%;
 
@@ -52,6 +58,8 @@ $card-height: 100%;
 
 @import "vue-select/dist/vue-select.css";
 
+@import "bootstrap-icons/font/bootstrap-icons.scss";
+
 $custom-colors: (
   "sfsite": #181b2c,
 );
@@ -60,7 +68,10 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 
 a,
 a:hover {
-  color: $body-color;
+  color: #e2c4ff;
+}
+
+a:not(:hover) {
   text-decoration: none;
 }
 

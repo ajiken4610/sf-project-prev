@@ -45,8 +45,8 @@
 </template>
 
 <script setup lang="ts">
-import { SFProject } from "~~/types/SFProject";
-const { $vSelect: VSelect } = useNuxtApp();
+import { SFProject } from "~~/composables/SFProject";
+const VSelect = useVSelect();
 const searchingText = ref("");
 function onTagTextInput(search: string) {
   searchingText.value = search;

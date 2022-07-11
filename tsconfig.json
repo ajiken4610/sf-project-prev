@@ -1,5 +1,4 @@
 {
   // https://v3.nuxtjs.org/concepts/typescript
-  "extends": "./.nuxt/tsconfig.json",
-  "types": ["node", "types", "node_modules/@types"]
+  "extends": "./.nuxt/tsconfig.json"
 }

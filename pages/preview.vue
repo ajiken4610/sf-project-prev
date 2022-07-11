@@ -10,11 +10,13 @@ div
       iframe(v-if="allowLoad" :src="frameLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
     .title-owner-wrapper
       span.text-muted.tag(v-if="data.tags" v-for="tag in data.tags") {{"#"+tag}}
-      .h5(v-html="$parseMarkdown(data.title||'')")
+      ShareButton.float-end(link="sfsitepreview.web.app")
+      .h5(v-html="parseMarkdown(data.title||'')")
       .text-muted {{data.owner}}
+      
     hr
     .description-wrapper
-      div(v-html="$parseMarkdown(data.description||'')")
+      div(v-html="parseMarkdown(data.description||'')")
   hr.my-5
   .card-wrapper
     .h4 カード表示プレビュー
@@ -27,12 +29,30 @@ div
         ProjectCard(:project="data")
       .col
         ProjectCard(:project="data")
+    hr
+    .horizontal-card-wrapper
+      ProjectCard(:project="data" :horizontal="true")
+      ProjectCard(:project="data" :horizontal="true")
+      ProjectCard(:project="data" :horizontal="true")
+      ProjectCard(:project="data" :horizontal="true")
 </template>
 
 <script setup lang="ts">
 import { Buffer } from "buffer";
-import { SFProject } from "@/types/SFProject";
-const { $parseMarkdown } = useNuxtApp();
+import { SFProject } from "~~/composables/SFProject";
+// import { Popover } from "bootstrap";
+// const shareButton = ref<null | HTMLAnchorElement>(null);
+// const shareButtonPopover = ref<null | Popover>(null);
+// onMounted(() => {
+//   nextTick(() => {
+//     if (shareButton.value !== null) {
+//       shareButtonPopover.value = new Popover(shareButton.value, {
+//         trigger: "focus",
+//       });
+//     }
+//   });
+// });
+
 const route = useRoute();
 const data = {
   ...({
@@ -43,6 +63,7 @@ const data = {
     type: "none",
     id: "",
     ratio: "",
+    tags: [],
   } as SFProject),
   ...route.query,
 };
@@ -112,5 +133,11 @@ img {
 }
 .tag:not(:first-child) {
   padding-left: 0.25em;
+}
+.horizontal-card-wrapper > * {
+  max-width: 24rem;
+}
+.horizontal-card-wrapper > :not(:last-child) {
+  margin-bottom: 1.5rem;
 }
 </style>
