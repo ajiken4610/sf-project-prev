@@ -61,7 +61,7 @@ renderer.heading = (text, level, raw) => {
 renderer.table = (header, body) => {
   if (body) body = `<tbody>${body}</tbody>`;
 
-  return `<table class="table"><thead>${header}</thead>${body}</table>`;
+  return `<div class="table-responsive"><table class="table"><thead>${header}</thead>${body}</table></div>`;
 };
 
 const markedOptions = {
@@ -74,7 +74,7 @@ const markedOptions = {
 };
 
 const sanitizeHtmlOptions = {
-  allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
+  allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img", "del"]),
   allowedAttributes: {
     ...sanitizeHtml.defaults.allowedAttributes,
     ...{
@@ -89,6 +89,7 @@ const sanitizeHtmlOptions = {
   allowedClasses: {
     "*": ["hljs-*"],
     table: ["table"],
+    div: ["table-responsive"],
     a: ["*"],
   },
 };
