@@ -5,7 +5,7 @@
   h1.title 企画の詳細
   div
     label.form-label(for="input-title") タイトル
-    input#input-title.form-control(v-model="data.title" placeholder="Markdown記法が利用できます")
+    input#input-title.form-control(v-model="data.title" placeholder="タイトル...")
   div
     label.form-label(for="input-description") 詳細
     FlexTextarea#input-description.form-control(v-model="data.description" placeholder="Markdown記法が利用できます")

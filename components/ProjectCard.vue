@@ -9,9 +9,9 @@
           text(x="50%" y="50%" dy=".3em" text-anchor="middle") No thumbnail
     div(:class="{'col-8':responsiveHorizontal}")
       .card-body
-        .h6.card-title(v-html="parseMarkdown(props.project.title)")
+        .h6.card-title(v-html="props.project.title")
         .h6.mb-2.text-muted.card-subtitle(v-if="!responsiveHorizontal") {{props.project.owner}}
-        div(v-if="!responsiveHorizontal" v-html="parseMarkdown(props.project.description)").card-text.description
+        MarkdownViewer(v-if="!responsiveHorizontal" :src="props.project.description").card-text.description
         div(v-else).card-text.text-muted {{props.project.owner}}
       NuxtLink.stretched-link(to="/")
 

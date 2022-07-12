@@ -11,14 +11,14 @@ div
         .display-1.d-table-cell.align-middle.text-center Loading...
       iframe(v-if="allowLoad" :src="frameLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
     .title-owner-wrapper
-      span.text-muted.tag(v-if="data.tags" v-for="tag in data.tags") {{"#"+tag}}
-      .h5(v-html="parseMarkdown(data.title)")
-      ShareButton.float-end()
+      span.text-muted.tag(v-if="data.tags" v-for="tag in typeof data.tags === 'string'?[data.tags]:data.tags") {{"#"+tag}}
+      .h5(v-html="data.title")
+      ShareButton.float-end
       .text-muted {{data.owner}}
       
     hr
     .description-wrapper
-      div(v-html="parseMarkdown(data.description)")
+      MarkdownViewer.description(:src="data.description")
   hr.my-5
   .card-wrapper
     .h4 カード表示プレビュー
@@ -110,6 +110,13 @@ const defaultRatio = computed(
 </script>
 
 <style scoped lang="scss">
+@import "bootstrap/scss/mixins/buttons";
+.description:deep(img) {
+  display: block;
+  width: 75%;
+  margin: auto;
+}
+
 .iframe-wrapper {
   position: relative;
   padding-bottom: min(90vh, v-bind("data.ratio || defaultRatio"));
