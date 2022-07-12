@@ -17,7 +17,7 @@ export default defineNuxtConfig({
         plugins: [
           visualizer({
             open: true,
-            filename: "dist/stats.html",
+            filename: "docs/index.html",
             gzipSize: true,
             brotliSize: true,
           }),
