@@ -1,13 +1,8 @@
----
-title: ''
----
 # What is this?
 SFサイトのプレビューを作成することができるサイトです。
 
 ## Getting started
-:::button-normal{link="/editor"}
-Go to Editor>
-:::
+# Go to editor {{class='btn btn-primary mb-2' href='/editor'}}
 このリンクよりアクセスして、内容を編集して遊んでみてください。
 
 ## Usage
@@ -41,13 +36,12 @@ Youtube動画や、GoogleDriveのPDFファイルなどをIDで指定します。
 Youtube動画、GoogleDriveのファイル(ファイルプレビューとRawファイル)、Githubのファイル、Gist埋め込み、ページ埋め込み、NoContent  に対応します。  
 以下に、どのように記述すればよいか示しておきます。企画にはそれぞれIDを指定してください。  
 Youtubeでは、VideoId、GoogleDriveではFileIdとか言います。
-:::content-table
+
 TYPE|URL|ID
 :-|:-|:-
 Youtube|https://youtube.com/watch?v=WwXxYyZz|WwXxYyZz
 Youtube|https://youtu.be/WwXxYyZz|WwXxYyZz
 GoogleDrive|https://drive.google.com/file/d/WwXxYyZz/view?usp=sharing|WwXxYyZz
-:::
 
 ## Markdown記法チートシート
 Markdown記法では、基本的な文字の装飾が可能である。
@@ -214,3 +208,30 @@ Markdown記法では、基本的な文字の装飾が可能である。
 |取り消し|`~~`|`~~DELETED~~`|~~DELETED~~|
 |下線|`<u></u>`|`<u>UNDERLINED</u>`|<u>UNDERLINED</u>|
 
+
+## リンク
+### 書き方
+```markdown
+[表示する文字列](リンク)
+```
+### 例
+#### ソース
+```markdown
+##### [Twitter](https://twitter.com)
+-
+```
+#### 実行結果
+##### [Twitter](https://twitter.com)
+
+## 画像
+### 書き方
+```markdown
+![画像が読み込めなかったときの代替テキスト](画像のURL)
+```
+### 例
+#### ソース
+```markdown
+![5分で1000文字行った！](...画像のURL)
+```
+#### 実行結果
+![5分で1000文字行った！](https://drive.google.com/uc?id=1tX2rYAsKNCHorCttImuzs-cRNfTNKeAz)

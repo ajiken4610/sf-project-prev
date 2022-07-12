@@ -112,12 +112,6 @@ const defaultRatio = computed(
 .description > :not(:last-child) {
   margin-bottom: 1rem;
 }
-.description:deep(img) {
-  display: block;
-  width: 75%;
-  margin: auto;
-  border-radius: 5px;
-}
 
 .iframe-wrapper {
   position: relative;
