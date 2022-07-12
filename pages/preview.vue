@@ -15,7 +15,6 @@ div
       .h5(v-html="data.title")
       ShareButton.float-end
       .text-muted {{data.owner}}
-      
     hr
     .description-wrapper
       MarkdownViewer.description(:src="data.description")
@@ -110,11 +109,14 @@ const defaultRatio = computed(
 </script>
 
 <style scoped lang="scss">
-@import "bootstrap/scss/mixins/buttons";
+.description > :not(:last-child) {
+  margin-bottom: 1rem;
+}
 .description:deep(img) {
   display: block;
   width: 75%;
   margin: auto;
+  border-radius: 5px;
 }
 
 .iframe-wrapper {

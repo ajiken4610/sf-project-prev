@@ -9,10 +9,13 @@ import { Synchronizer, Sleeper } from "./composables/Utils";
 const router = useRouter();
 const synchronizer = new Synchronizer();
 router.beforeEach((to, from, next) => {
-  synchronizer.synchronized(async () => {
-    next();
-    await Sleeper.sleep(2000);
-  });
+  if (to.path === from.path) {
+  } else {
+    synchronizer.synchronized(async () => {
+      next();
+      await Sleeper.sleep(2000);
+    });
+  }
 });
 useHead({
   titleTemplate: (titleChunk) => {
@@ -22,8 +25,8 @@ useHead({
 </script>
 
 <style lang="scss">
+@import "highlight.js/scss/github-dark.scss";
 // Default variable overrides
-
 $light: #dddddd;
 $dark: #181b2c;
 

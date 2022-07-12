@@ -8,7 +8,7 @@
     input#input-title.form-control(v-model="data.title" placeholder="タイトル...")
   div
     label.form-label(for="input-description") 詳細
-    FlexTextarea#input-description.form-control(v-model="data.description" placeholder="Markdown記法が利用できます")
+    FlexMonospaceEditor#input-description.form-control(v-model="data.description" placeholder="Markdown記法が利用できます")
   div
     label.form-label(for="input-tags") タグ(検索キーワードとして参照されます。)
     VSelect(v-model="(data.tags)" multiple :options="searchingText?[searchingText]:[]" @search="onTagTextInput")

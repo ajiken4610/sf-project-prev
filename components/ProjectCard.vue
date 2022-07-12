@@ -46,6 +46,14 @@ window.addEventListener("resize", () => {
   line-clamp: 2;
   -webkit-line-clamp: 2;
 }
+.description:deep(h1, h2, h3, h4, h5, h6) {
+  font-size: 100%;
+}
+.description:deep(img),
+.description:deep(pre) {
+  display: none;
+}
+
 .card.vertical {
   max-height: 24rem;
 }
