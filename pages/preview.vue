@@ -2,6 +2,8 @@
 div
   Head
     Title {{data.title}}
+    Meta(v-if="data.thumbnail" name="thumbnail" :content="data.thumbnail")
+    Meta(v-if="data.description" name="description" :content="data.description")
   .project-wrapper
     .iframe-wrapper(v-if="data.type !== 'none'")
       img(v-if="data.thumbnail" :src="data.thumbnail")
@@ -10,13 +12,13 @@ div
       iframe(v-if="allowLoad" :src="frameLink" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
     .title-owner-wrapper
       span.text-muted.tag(v-if="data.tags" v-for="tag in data.tags") {{"#"+tag}}
-      .h5(v-html="parseMarkdown(data.title||'')")
-      ShareButton.float-end(link="https://sfsitepreview.web.app")
+      .h5(v-html="parseMarkdown(data.title)")
+      ShareButton.float-end()
       .text-muted {{data.owner}}
       
     hr
     .description-wrapper
-      div(v-html="parseMarkdown(data.description||'')")
+      div(v-html="parseMarkdown(data.description)")
   hr.my-5
   .card-wrapper
     .h4 カード表示プレビュー
@@ -35,10 +37,22 @@ div
       ProjectCard(:project="data" :horizontal="true")
       ProjectCard(:project="data" :horizontal="true")
       ProjectCard(:project="data" :horizontal="true")
+  hr
+  table.table
+    thead
+      tr
+        td KEY
+        td VALUE
+    tbody
+      tr(v-for="(value,key) in platform")
+        template(v-if="typeof value === 'string'")
+          td.text-uppercase {{key}}
+          td {{value}}
 </template>
 
 <script setup lang="ts">
 import { Buffer } from "buffer";
+import platform from "platform";
 import { SFProject } from "~~/composables/SFProject";
 // import { Popover } from "bootstrap";
 // const shareButton = ref<null | HTMLAnchorElement>(null);
@@ -54,20 +68,9 @@ import { SFProject } from "~~/composables/SFProject";
 // });
 
 const route = useRoute();
-const data = {
-  ...({
-    title: "No title",
-    description: "No description",
-    owner: "No owner",
-    thumbnail: "",
-    type: "none",
-    id: "",
-    ratio: "",
-    tags: [],
-  } as SFProject),
-  ...route.query,
-};
+const data = toStrict(route.query);
 const allowLoad = ref(false);
+const userAgent = navigator.userAgent;
 setTimeout(() => {
   allowLoad.value = true;
 }, 2000);

@@ -30,7 +30,7 @@ $dark: #181b2c;
 $body-bg: #181b2c;
 $body-color: #fff;
 
-$component-active-color: #9a77db;
+$component-active-color: $body-color;
 $component-active-bg: $body-bg;
 
 $popover-bg: $body-bg;
@@ -68,7 +68,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 
 a,
 a:hover {
-  color: #e2c4ff;
+  color: $body-color;
 }
 
 a:not(:hover) {

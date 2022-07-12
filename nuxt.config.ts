@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from "nuxt";
+import { visualizer } from "rollup-plugin-visualizer";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -9,5 +10,19 @@ export default defineNuxtConfig({
   },
   typescript: {
     strict: true,
+  },
+  vite: {
+    build: {
+      rollupOptions: {
+        plugins: [
+          visualizer({
+            open: true,
+            filename: "dist/stats.html",
+            gzipSize: true,
+            brotliSize: true,
+          }),
+        ],
+      },
+    },
   },
 });

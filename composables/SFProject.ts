@@ -27,6 +27,12 @@ export class SFProject {
   thumbnail?: string;
   ratio?: string;
   tags?: string[];
+  static toString(self: SFProject) {
+    return encodeURIComponent(JSON.stringify(self));
+  }
+  static fromString(self: string) {
+    return JSON.parse(decodeURIComponent(self));
+  }
 }
 
 export class StrictSFProject {}
