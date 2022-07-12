@@ -1,18 +1,19 @@
 <template lang="pug">
-.card.project-card.bg-dark.border-secondary.overflow-hidden(:class="{horizontal:responsiveHorizontal,vertical:!responsiveHorizontal}")
-  div(:class="{row:responsiveHorizontal,'g-0':responsiveHorizontal}")
-    div.position-relative(:class="{'col-4':responsiveHorizontal}")
+.card.project-card.bg-dark.border-secondary.overflow-hidden(
+    :class="{horizontal:responsiveHorizontal,vertical:!responsiveHorizontal}"
+  )
+  div(:class="{row:responsiveHorizontal,'g-0':responsiveHorizontal,'h-100':responsiveHorizontal}")
+    div.position-relative(:class="{'col-4':responsiveHorizontal,'h-100':responsiveHorizontal}")
       img.card-img-top(v-if="props.project.thumbnail" :src="props.project.thumbnail")
       .no-thumbnail(v-else)
         svg(height="100%" width="100%")
           rect(width="100%" height="100%" fill="#888")
-          text(x="50%" y="50%" dy=".3em" text-anchor="middle") No thumbnail
+          text(x="50%" y="50%" dy=".4em" text-anchor="middle") No thumbnail
     div(:class="{'col-8':responsiveHorizontal}")
       .card-body
         .h6.card-title(v-html="props.project.title")
-        .h6.mb-2.text-muted.card-subtitle(v-if="!responsiveHorizontal") {{props.project.owner}}
-        MarkdownViewer(v-if="!responsiveHorizontal" :src="props.project.description").card-text.description
-        div(v-else).card-text.text-muted {{props.project.owner}}
+        .fs-light.mb-2.text-muted.card-subtitle {{props.project.owner}}
+        MarkdownViewer(:src="props.project.description").card-text.description
       NuxtLink.stretched-link(to="/")
 
 </template>
@@ -36,15 +37,21 @@ window.addEventListener("resize", () => {
 </script>
 
 <style scoped lang="scss">
-.description,
-.card-title,
-.card-subtitle {
+.vertical .description,
+.card-title {
   overflow: hidden;
   display: -webkit-box;
   box-orient: vertical;
   -webkit-box-orient: vertical;
   line-clamp: 2;
   -webkit-line-clamp: 2;
+}
+.card-subtitle,
+.card-owner,
+.horizontal .description {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .description:deep(h1, h2, h3, h4, h5, h6) {
   font-size: 100%;
@@ -58,17 +65,20 @@ window.addEventListener("resize", () => {
   max-height: 24rem;
 }
 .card.horizontal {
-  max-height: 8rem;
+  height: 8rem;
 }
+.card.horizontal {
+  &.card-img-top,
+  .no-thumbnail {
+    position: absolute;
+    height: 100%;
+  }
+}
+
 .card-img-top {
   object-fit: cover;
   height: 8rem;
   //filter: blur(1px);
-}
-
-.horizontal .card-img-top {
-  position: absolute;
-  height: 100%;
 }
 
 .stretched-link:hover::after {
