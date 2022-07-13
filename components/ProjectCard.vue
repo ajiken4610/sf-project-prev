@@ -2,15 +2,15 @@
 .card.project-card.bg-dark.border-secondary.overflow-hidden(
     :class="{horizontal:responsiveHorizontal,vertical:!responsiveHorizontal}"
   )
-  div(:class="{row:responsiveHorizontal,'g-0':responsiveHorizontal,'h-100':responsiveHorizontal}")
-    div.position-relative(:class="{'col-4':responsiveHorizontal,'h-100':responsiveHorizontal}")
+  div(:class="{'row g-0 h-100':responsiveHorizontal}")
+    div.position-relative(:class="{'col-4 h-100':responsiveHorizontal}")
       img.card-img-top(v-if="props.project.thumbnail" :src="props.project.thumbnail")
       .no-thumbnail(v-else)
         svg(height="100%" width="100%")
           rect(width="100%" height="100%" fill="#888")
           text(x="50%" y="50%" dy=".4em" text-anchor="middle") No thumbnail
-    div(:class="{'col-8':responsiveHorizontal}")
-      .card-body
+    div(:class="{'col-8 d-table':responsiveHorizontal}")
+      .card-body(:class="{'d-table-cell align-middle':responsiveHorizontal}")
         .h6.card-title(v-html="props.project.title")
         .fs-light.mb-2.text-muted.card-subtitle {{props.project.owner}}
         MarkdownViewer(:src="props.project.description").card-text.description
@@ -48,10 +48,17 @@ window.addEventListener("resize", () => {
 }
 .card-subtitle,
 .card-owner,
-.horizontal .description {
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.horizontal .description > :deep(*) {
   overflow: hidden;
+  display: -webkit-box;
+  box-orient: vertical;
+  -webkit-box-orient: vertical;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+}
+.horizontal .description > :deep(*) {
+  height: 1rem;
+  margin-bottom: 0;
 }
 .description:deep(h1, h2, h3, h4, h5, h6) {
   font-size: 100%;
